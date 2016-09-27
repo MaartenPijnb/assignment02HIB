@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h1>Create a new user</h1>
+                <f:view>
+                    <h:form>
+                        <div class="row">
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Firstname"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.firstname}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Lastname"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.lastname}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Email"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.email}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Phone"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.phone}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Password"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.password}"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="six columns offset-by-six">
+                                    <h:commandButton class="u-full-width" action="#{PersonView.postPerson()}" value="Create user"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
