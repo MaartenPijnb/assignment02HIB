@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,10 +32,10 @@ public class Rating implements Serializable {
     @Temporal (TemporalType.DATE)
     private GregorianCalendar date;
     
-    @OneToMany(mappedBy = "givenRating")
+    @ManyToOne
     private Person giver;
     
-    @OneToMany(mappedBy = "receivedRating")
+    @ManyToOne
     private Person receiver;
 
     public Rating() {

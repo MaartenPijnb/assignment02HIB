@@ -42,14 +42,14 @@ public class Person implements Serializable {
     private String firstname, lastname, phone, password;
     private Integer accountLevel;
     
-    @ManyToOne
-    private Rating rating;
+    @OneToMany(mappedBy="receiver")
+    private ArrayList<Rating> ratings;
     
-    @OneToMany(mappedBy = "product")
-    ArrayList<Product> products;
+    @OneToMany(mappedBy = "seller")
+    private ArrayList<Product> products;
     
     @OneToMany(mappedBy = "bidder")
-    ArrayList<Bid> bids;
+    private ArrayList<Bid> bids;
 
     public Person() {
     }
@@ -62,13 +62,15 @@ public class Person implements Serializable {
         this.accountLevel = accountLevel;
     }
 
-    public Rating getRating() {
-        return rating;
+    public ArrayList<Rating> getRatings() {
+        return ratings;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setRatings(ArrayList<Rating> ratings) {
+        this.ratings = ratings;
     }
+
+
 
     public ArrayList<Product> getProducts() {
         return products;
