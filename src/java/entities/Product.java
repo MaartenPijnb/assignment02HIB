@@ -6,7 +6,12 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,24 +33,24 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name, description;
-    
+
     @Temporal(TemporalType.DATE)
-    private GregorianCalendar moment, startDate, deadline;
-    
+    private Date moment, startDate, deadline;
+
     private Double minimumPriceToSell, startPrice, sellPrice, intervalPrice;
-    
+
     @Enumerated(EnumType.STRING)
     private Status status;
-    
+
     @Enumerated(EnumType.STRING)
     private Category category;
-    
+
     @ManyToOne
     private Person seller;
-    
+
     @OneToMany(mappedBy = "product")
     ArrayList<Bid> bids;
 
@@ -68,29 +73,32 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public GregorianCalendar getMoment() {
+    public Date getMoment() {
         return moment;
     }
 
-    public void setMoment(GregorianCalendar moment) {
+    public void setMoment(Date moment) {
         this.moment = moment;
     }
 
-    public GregorianCalendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(GregorianCalendar startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public GregorianCalendar getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(GregorianCalendar deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
+
+   
+
 
     public Double getMinimumPriceToSell() {
         return minimumPriceToSell;
@@ -156,9 +164,6 @@ public class Product implements Serializable {
         this.bids = bids;
     }
 
-    
-    
-    
     public Long getId() {
         return id;
     }
@@ -191,5 +196,5 @@ public class Product implements Serializable {
     public String toString() {
         return "entities.Product[ id=" + id + " ]";
     }
-    
+
 }
