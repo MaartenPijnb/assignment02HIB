@@ -7,6 +7,16 @@
 
     <body>
 
+
+
+        <script>
+            jQuery(document).ready(function ($) {
+
+                $(".datepickers").datepicker();
+
+            });
+        </script>
+
         <ui:composition template="./../template.xhtml">
 
             <ui:define name="top">
@@ -20,38 +30,94 @@
                     <h:form class="form-horizontal">
                         <div class="form-group">
                             <h:outputLabel class="col-sm-2" value="Productname"/>
-                            <div class="col-sm-10">
-                                <h:inputText  class="form-control" value="#{PersonView.person.firstname}"/>
+                            <div class="col-sm-5">
+                                <h:inputText  class="form-control" value="#{product.product.name}"/>
+                            </div>
+
+                            <h:outputLabel class="col-sm-1" value="Category"/>
+                            <div class="col-sm-4">
+                                <h:selectOneMenu class="form-control" value="#{product.product.category}">
+
+                                    <f:selectItems value="#{product.allCategories}" var="c"
+                                                   itemLabel="#{c}" itemValue="#{product.product.category}" />
+                                </h:selectOneMenu>
                             </div>
                         </div>
                         <div class="form-group">
+                            <h:outputLabel class="col-sm-2" value="Start price to bid"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.startPrice}"/>
+                            </div>
+                            <h:outputLabel class="col-sm-2" value="Price to auto sell"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.sellPrice}"/>
+                            </div>
+                           
+                        </div>
+                           <div class="form-group">
+                            <h:outputLabel class="col-sm-2" value="Minmum selling price"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.minimumPriceToSell}"/>
+                            </div>
+                            <h:outputLabel class="col-sm-2" value="Interval price"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.intervalPrice}"/>
+                            </div>
+                           
+                        </div>
+                        
+                        
+              
+                        <div class="form-group">
+
+
                             <h:outputLabel class="col-sm-2" value="Description"/>
                             <div class="col-sm-10">
-                                <h:inputTextarea class="form-control" value="#{PersonView.person.firstname}"/>
+                                <h:inputTextarea rows="5"  class="form-control" value="#{product.product.description}"/>
                             </div>
                         </div>
+
+
+
                         <div class="form-group">
-                            <h:outputLabel value="Abc"/>
-                            <div class="col-sm-10">
-                                <h:inputText class="form-control" value="#{PersonView.person.firstname}"/>
+                            <h:outputLabel class="col-sm-2" value="Start date to bid"/>
+                            <div class="col-sm-4">
+                                <h:inputText id="dateStart" value="#{product.product.startDate}"
+                                                 class="form-control" required="true"
+                                             label="Receipt Date" >
+
+                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                </h:inputText>
+
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Abc"/>
-                            <div class="col-sm-10">
-                                <h:inputText class="form-control" value="#{PersonView.person.firstname}"/>
+                            <h:outputLabel class="col-sm-2" value="End date"/>
+                            <div class="col-sm-4">
+                               
+                                <h:inputText id="dateDeadline" value="#{product.product.deadline}"
+                                             class="form-control" required="true"
+                                             label="Receipt Date" >
+
+                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                </h:inputText>
                             </div>
+
                         </div>
+                        <div class="six columns offset-by-six">
+                            <h:commandButton class="btn btn-primary" action="#{product.postProduct()}" value="Create product"/>
+                        </div>
+
                     </h:form>
                 </f:view>
 
             </ui:define>
 
             <ui:define name="bottom">
-                bottom
+
             </ui:define>
 
         </ui:composition>
 
     </body>
+
+
 </html>

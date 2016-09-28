@@ -10,5 +10,5 @@ package entities;
  * @author Maarten
  */
 public enum Status {
-    APPROVED, PUBLISHED, SOLD, PENDING
+   PENDING, APPROVED, PUBLISHED, SOLD
 }
