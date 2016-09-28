@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Maarten VG
+ * @author Maartens
  */
 /*
 @NamedQueries({
