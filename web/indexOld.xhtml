@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+            
+            <ui:define name="top">
+     
+
+            </ui:define>
+            <ui:define name="content">
+                
+                <h1>Login</h1>
+                <f:view>
+                    
+                   goubergen is lelijk
+                    <h:form>
+                        <div class="row">
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Email"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.email}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="six columns">
+                                    <h:outputLabel value="Password"/>
+                                </div>
+                                <div class="six columns">
+                                    <h:inputText class="u-full-width" value="#{PersonView.person.password}"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="six columns offset-by-six">
+                                    <h:commandButton class="u-full-width" action="#{MessageView.postMessage}" value="Login"/>
+                                    <h:link value="Create new user" outcome="html/createUser" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:form>
+                   <h:link value="Create new productentry" outcome="html/createProduct" />
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
