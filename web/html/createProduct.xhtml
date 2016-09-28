@@ -36,7 +36,7 @@
 
                             <h:outputLabel class="col-sm-1" value="Category"/>
                             <div class="col-sm-4">
-                                <h:selectOneMenu class="form-control" value="#{product.allCategories[0]}">
+                                <h:selectOneMenu class="form-control" value="#{product.product.category}">
 
                                     <f:selectItems value="#{product.allCategories}" var="c"
                                                    itemLabel="#{c}" itemValue="#{product.product.category}" />
@@ -45,18 +45,29 @@
                         </div>
                         <div class="form-group">
                             <h:outputLabel class="col-sm-2" value="Start price to bid"/>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <h:inputText class="form-control" value="#{product.product.startPrice}"/>
                             </div>
                             <h:outputLabel class="col-sm-2" value="Price to auto sell"/>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <h:inputText class="form-control" value="#{product.product.sellPrice}"/>
                             </div>
-                            .<h:outputLabel class="col-sm-2" value="interval price"/>
-                            <div class="col-sm-2">
-                                <h:inputText id="whynot" class="fixheight form-control" value="#{product.product.intervalPrice}"/>
-                            </div>
+                           
                         </div>
+                           <div class="form-group">
+                            <h:outputLabel class="col-sm-2" value="Minmum selling price"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.minimumPriceToSell}"/>
+                            </div>
+                            <h:outputLabel class="col-sm-2" value="Interval price"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control" value="#{product.product.intervalPrice}"/>
+                            </div>
+                           
+                        </div>
+                        
+                        
+              
                         <div class="form-group">
 
 
