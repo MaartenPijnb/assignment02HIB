@@ -21,13 +21,13 @@ import javax.persistence.OneToMany;
  *
  * @author Maartens
  */
-/*
+
 @NamedQueries({
     @NamedQuery(
             name = "Person.FindByEmail",
-            query = "select p from person t order by t.teamName")
+            query = "select p from Person p where p.email = :email")
 })
-*/
+
 @Entity
 public class Person implements Serializable {
 

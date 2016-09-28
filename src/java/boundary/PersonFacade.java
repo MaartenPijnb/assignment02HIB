@@ -29,9 +29,16 @@ public class PersonFacade extends AbstractFacade<Person> {
         super(Person.class);
     }
     
-    public Boolean checkLogin(){
-        
-        return true;
+    public Boolean checkIfMailExists(String email){
+       Person person = (Person) this.getEntityManager().createNamedQuery("Person.FindByEmail").setParameter("email", email).getSingleResult();
+       
+        if (person != null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+       
     }
     
 }
