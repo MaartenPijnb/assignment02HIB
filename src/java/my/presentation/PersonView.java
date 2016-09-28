@@ -39,6 +39,8 @@ public class PersonView {
     }
     
     public String postPerson(){
+        // By default it is impossible for registered accounts to be admins
+        person.setAccountLevel(0);
         this.personFacade.create(person);
         return "theend";
     }
