@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Maarten Van Goubergen
+ * @author Maarten VG
  */
 /*
 @NamedQueries({
