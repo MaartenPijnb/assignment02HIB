@@ -42,7 +42,7 @@ public class PersonView {
         // By default it is impossible for registered accounts to be admins
         person.setAccountLevel(0);
         this.personFacade.create(person);
-        return "theend";
+        return "/index";
     }
     
 }

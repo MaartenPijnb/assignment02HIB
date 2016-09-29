@@ -6,6 +6,8 @@
 package boundary;
 
 import entities.Person;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,9 +32,9 @@ public class PersonFacade extends AbstractFacade<Person> {
     }
     
     public Boolean checkIfMailExists(String email){
-       Person person = (Person) this.getEntityManager().createNamedQuery("Person.FindByEmail").setParameter("email", email).getSingleResult();
+       List results = this.getEntityManager().createNamedQuery("Person.FindByEmail").setParameter("email", email).getResultList();
        
-        if (person != null) {
+        if (results.isEmpty()) {
             return false;
         }
         else {

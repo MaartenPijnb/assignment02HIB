@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-md-6 col-md-offset-1">
                                     <h:inputText id="email" class="form-control" value="#{PersonView.person.email}">
-                                        <!--<f:validator validatorId="MailValidator"/>-->
+                                        <f:validator binding="#{MailValidator}"/>
                                         <h:message for="email" style="color:red" />
                                     </h:inputText>
                                 </div>
@@ -88,6 +88,9 @@
                             </div>
                         </div>
                     </h:form>
+                    <div class="row">
+                        <h:link value="Back to login" outcome="/index" />
+                    </div>
                 </f:view>
             </ui:define>
         </ui:composition>
