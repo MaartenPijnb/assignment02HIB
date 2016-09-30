@@ -10,17 +10,19 @@ import entities.Category;
 import entities.Product;
 
 import entities.Status;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -39,6 +41,8 @@ public class ProductView {
     //getting al the enumaration values
     private Category[] allCategories;
     private Status[] allStatus;
+    private List<Product> allProducts;
+    private Product currentProduct;
     private Product product;
 
     public ProductView() {
@@ -48,7 +52,22 @@ public class ProductView {
     @PostConstruct
     public void init() {
         allCategories = Category.values();
-        allStatus = Status.values();
+        allProducts = productFacade.findAll();
+    }
+
+    private Part file; // +getter+setter
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    
+    public void save() throws IOException {
+       //file.write("../img/halokes.jpg");
     }
 
     public Status[] getAllStatus() {
@@ -59,10 +78,23 @@ public class ProductView {
         return allCategories;
     }
 
+    public List<Product> getAllProducts() {
+        return allProducts;
+    }
+
     public Product getProduct() {
         return product;
     }
 
+     public Product getCurrentProduct() {
+        return currentProduct;
+    }
+    public String toDetail(String id){
+        Product tempProduct = new Product();
+        tempProduct.setId(Long.parseLong(id));
+        currentProduct = productFacade.find(tempProduct.getId());
+        return "html/productDetail";
+    }
     public String postProduct() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Date date = new Date();

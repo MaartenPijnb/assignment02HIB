@@ -7,7 +7,7 @@
 
     <body>
 
-        
+
 
         <ui:composition template="./../template.xhtml">
 
@@ -44,9 +44,9 @@
                             <div class="col-sm-4">
                                 <h:inputText class="form-control" value="#{product.product.sellPrice}"/>
                             </div>
-                           
+
                         </div>
-                           <div class="form-group">
+                        <div class="form-group">
                             <h:outputLabel class="col-sm-2" value="Minmum selling price"/>
                             <div class="col-sm-4">
                                 <h:inputText class="form-control" value="#{product.product.minimumPriceToSell}"/>
@@ -55,11 +55,11 @@
                             <div class="col-sm-4">
                                 <h:inputText class="form-control" value="#{product.product.intervalPrice}"/>
                             </div>
-                           
+
                         </div>
-                        
-                        
-              
+
+
+
                         <div class="form-group">
 
 
@@ -75,18 +75,18 @@
                             <h:outputLabel class="col-sm-2" value="Start date to bid"/>
                             <div class="col-sm-4">
                                 <h:inputText id="dateStart" value="#{product.product.startDate}"
-                                                 class="form-control dateStart" required="true"
+                                             class="form-control dateStart" required="true"
                                              label="Receipt Date" >
-²                                   
+                                    ²                                   
                                     <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                                    
+
                                 </h:inputText>
 
                             </div>
-                            
+
                             <h:outputLabel class="col-sm-2" value="End date"/>
                             <div class="col-sm-4">
-                               
+
                                 <h:inputText id="dateDeadline" value="#{product.product.deadline}"
                                              class="form-control dateDeadline" required="true"
                                              label="Receipt Date" >
@@ -101,6 +101,12 @@
                         </div>
 
                     </h:form>
+
+                   <h:form enctype="multipart/form-data">
+    <h:inputFile value="#{product.file}">
+        <f:ajax listener="#{product.save()}" />
+    </h:inputFile>
+</h:form>
                 </f:view>
 
             </ui:define>
