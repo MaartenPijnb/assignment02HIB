@@ -64,9 +64,10 @@ public class ProductView {
     }
 
     public String postProduct() {
-        // DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        // Date date = new Date();
-        //product.setMoment(date);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Date date = new Date();
+        product.setMoment(date);
+        product.setStatus(Status.PENDING); //hardcoded?
         this.productFacade.create(product);
         return "theend";
     }
