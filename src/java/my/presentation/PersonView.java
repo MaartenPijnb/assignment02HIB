@@ -45,4 +45,18 @@ public class PersonView {
         return "/index";
     }
     
+    public String login(){
+        if (personFacade.checkLogin(person.getEmail(), person.getPassword())) {
+            return "/index";
+        }
+        else {
+            return "/index";
+        }
+    }
+    
+    public String logout(){
+        this.personFacade.logout();
+        return "index";
+    }
+    
 }

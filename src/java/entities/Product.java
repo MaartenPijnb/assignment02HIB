@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +38,7 @@ public class Product implements Serializable {
     private Long id;
     private String name, description;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date moment, startDate, deadline;
 
     private Double minimumPriceToSell, startPrice, sellPrice, intervalPrice;

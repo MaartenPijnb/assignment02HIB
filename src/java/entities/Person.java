@@ -24,8 +24,11 @@ import javax.persistence.OneToMany;
 
 @NamedQueries({
     @NamedQuery(
-            name = "Person.FindByEmail",
-            query = "select p from Person p where p.email = :email")
+            name = "Person.findByEmail",
+            query = "select p from Person p where p.email = :email"),
+    @NamedQuery(
+            name = "Person.checkLogin",
+            query = "select p from Person p where p.email = :email and p.password = :password")
 })
 
 @Entity
@@ -140,6 +143,9 @@ public class Person implements Serializable {
         this.password = password;
     }
     
+    public String getFullname(){
+        return this.firstname + " " + this.lastname;
+    }
     
     
 

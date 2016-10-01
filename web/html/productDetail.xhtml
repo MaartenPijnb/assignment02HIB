@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="top">
+           
+            </ui:define>
+
+            <ui:define name="content">
+                <h1> ${product.currentProduct.name} </h1>
+                <strong>Category</strong>
+                ${product.currentProduct.category}
+                <br></br>
+                <strong>Description:</strong>
+                ${product.currentProduct.description}
+                
+                <table>
+                    <tr>
+                        <td>  <img  src="resources/img/antonTank.png" alt="" /></td>
+                        <td height="400px"><strong>Bidding expires on :</strong> ${product.currentProduct.deadline.toGMTString()}
+                            <p><strong> Instant sell price:</strong> ${product.currentProduct.sellPrice}€<br></br>
+                            <strong> Start bidprice:</strong> ${product.currentProduct.startPrice}€<br></br>
+                            <strong> Interval price:</strong> ${product.currentProduct.intervalPrice}€<br></br>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+              
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+          
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

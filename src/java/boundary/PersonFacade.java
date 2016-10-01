@@ -9,6 +9,7 @@ import entities.Person;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -30,17 +31,31 @@ public class PersonFacade extends AbstractFacade<Person> {
     public PersonFacade() {
         super(Person.class);
     }
-    
-    public Boolean checkIfMailExists(String email){
-       List results = this.getEntityManager().createNamedQuery("Person.FindByEmail").setParameter("email", email).getResultList();
-       
-        if (results.isEmpty()) {
+
+    public Boolean checkLogin(String email, String password) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        List results = this.getEntityManager().createNamedQuery("Person.checkLogin").setParameter("email", email).setParameter("password", password).getResultList();
+        if (!results.isEmpty()) {
+            Person user = (Person) results.get(0);
+            context.getExternalContext().getSessionMap().put("user", user);
+            return true;
+        } else {
             return false;
         }
-        else {
-            return true;
-        }
-       
     }
     
+    public void logout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
+
+    public Boolean checkIfMailExists(String email) {
+        List results = this.getEntityManager().createNamedQuery("Person.findByEmail").setParameter("email", email).getResultList();
+        if (results.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 }
