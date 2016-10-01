@@ -10,6 +10,8 @@ import entities.Person;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -50,7 +52,15 @@ public class PersonView {
             return "/index";
         }
         else {
-            return "/index";
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            "loginButton",
+                            new FacesMessage(
+                                    FacesMessage.SEVERITY_ERROR,
+                                    "WRONG EMAIL ADDRESS OR PASSWORD ENTERED!",
+                                    "WRONG EMAIL ADDRESS OR PASSWORD ENTERED!"));
+            return null;
         }
     }
     

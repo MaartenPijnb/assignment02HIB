@@ -10,7 +10,7 @@
 
             <ui:define name="content">
 
-                <h1>Create a new user</h1>
+                <h1>Register</h1>
 
                 <f:view>
                     <h:form class="form-horizontal">
@@ -21,9 +21,9 @@
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <h:inputText id="firstname" class="form-control" value="#{PersonView.person.firstname}">
-                                    <!--<f:validator validatorId="PersonValidator"/>-->
+                                    <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
-                                <!--                                    <h:message for="firstname" style="color:red" />-->
+                                <h:message for="firstname" style="color:red" />
                             </div>
                         </div>
 
@@ -35,9 +35,9 @@
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <h:inputText id="lastname" class="form-control"  value="#{PersonView.person.lastname}">
-                                    <!--                                        <f:validator validatorId="PersonValidator"/>-->
+                                                                            <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
-                                <!--                                    <h:message for="lastname" style="color:red" />-->
+                                                                    <h:message for="lastname" style="color:red" />
                             </div>
                         </div>
 
@@ -47,10 +47,10 @@
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <h:inputText id="email" class="form-control" value="#{PersonView.person.email}">
-<!--                                        <f:validator binding="#{MailValidator}"/>-->
+                                    <f:validator binding="#{EmailValidator}"/>
 
                                 </h:inputText>
-                                <!--                                    <h:message for="email" style="color:red" />-->
+                                <h:message for="email" style="color:red" />
                             </div>
                         </div>
 
@@ -60,9 +60,9 @@
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <h:inputText id="phone" class="form-control" value="#{PersonView.person.phone}">
-                                    <!--                                        <f:validator validatorId="PersonValidator"/>-->
+                                                                            <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
-                                <!--                                    <h:message for="phone" style="color:red" />-->
+                                                                    <h:message for="phone" style="color:red" />
                             </div>
                         </div>
 
@@ -72,15 +72,15 @@
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <h:inputSecret id="password" class="form-control" value="#{PersonView.person.password}">
-                                    <!--                                        <f:validator validatorId="PersonValidator"/>-->
+                                    <f:validator validatorId="PersonValidator"/>
                                 </h:inputSecret>
-                                <!--                                    <h:message for="password" style="color:red" />-->
+                                <h:message for="password" style="color:red" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-6">
-                                <h:commandButton class="form-control" action="#{PersonView.postPerson()}" value="Create user"/>
+                                <h:commandButton class="form-control" action="#{PersonView.postPerson()}" value="Register"/>
                             </div>
                         </div>
 
