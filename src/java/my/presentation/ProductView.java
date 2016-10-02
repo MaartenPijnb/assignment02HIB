@@ -105,7 +105,7 @@ public class ProductView {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
         currentProduct = productFacade.find(tempProduct.getId());
-        return "html/productDetail";
+        return "productDetail";
     }
     
     public String approveProduct(String id) {

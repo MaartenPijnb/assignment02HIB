@@ -2,27 +2,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-
     <body>
 
         <ui:composition template="./../template.xhtml">
 
             <ui:define name="top">
-
+                
             </ui:define>
 
             <ui:define name="content">
-                <h1>Approve entries</h1>
+                <h:panelGroup rendered="#{empty user}">
+                    <h:link value="Login" outcome="html/login" /> <br></br>
+                    <h:link value="Register" outcome="html/createUser" />
+                </h:panelGroup>
+                
+
+                <h:panelGroup rendered="#{not empty user}">
+                    <p>Welcome, #{user.firstname}</p>
+                    <h:form>
+                        <h:commandButton value="logout" action="#{PersonView.logout}" />
+                    </h:form>
+                </h:panelGroup>
+
+
+                
+                <h1>Auction Place</h1>
+
+                <strong>Category Title</strong>
 
                 <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
                     </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
                         class="glyphicon glyphicon-th"></span>Grid</a>
 
                 <div id="products" class="row list-group">
-                    <c:forEach var="item" items="#{product.productsPending}">
+                    <c:forEach var="item" items="#{product.allProducts}">
 
                         <div class="item  col-xs-4 col-lg-4">
                             <div class="thumbnail">
@@ -36,6 +52,10 @@
                                         #{item.description}
                                         <br>
                                             Instant buy price: €#{item.sellPrice}
+                                            <br>
+                                                Bid expires at #{item.deadline}
+
+                                            </br>
                                         </br>
 
                                     </p>
@@ -46,7 +66,7 @@
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <h:form>
-                                                <h:commandButton value="Approve" class="btn btn-success" action="#{product.approveProduct(item.id)}" />
+                                                <h:commandButton value="Start bidding" class="btn btn-success" action="#{product.toDetail(item.id)}" />
                                             </h:form>
 
 
@@ -62,10 +82,16 @@
 
 
                 </div>
+
+
+
+                <f:view>
+                    <h:link value="Create new productentry" outcome="createProduct" />
+                </f:view>
             </ui:define>
 
             <ui:define name="bottom">
-
+                
             </ui:define>
 
         </ui:composition>
