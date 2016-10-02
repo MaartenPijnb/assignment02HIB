@@ -136,4 +136,11 @@ public class ProductView {
         return "theend";
     }
 
+    public void setProductsApproved(List<Product> productsApproved) {
+        this.productsApproved = productsApproved;
+    }
+    
+    
+    
+
 }
