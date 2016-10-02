@@ -5,10 +5,13 @@
  */
 package boundary;
 
+import entities.Category;
 import entities.Product;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import other.FilterProduct;
 
 /**
  *
@@ -28,5 +31,35 @@ public class ProductFacade extends AbstractFacade<Product> {
     public ProductFacade() {
         super(Product.class);
     }
-    
+
+    public List filter(FilterProduct filter) {
+        Category category = null;
+        boolean categQuery = false;
+        String startQuery = "Select p from Product p WHERE ";
+        String query = startQuery;
+        
+        if (filter.getName() != null || !filter.getName().equals("")) {
+            query += "p.name LIKE '%" + filter.getName() + "%' ";
+        }
+        if (!filter.getCategory().equals("All categories")) {
+            if (!startQuery.equals(query)) {
+                query += " AND ";
+            }
+            categQuery = true;
+            category = Category.valueOf(filter.getCategory());
+            query += "p.category = :category";
+        }
+        
+        if (categQuery) {
+            // Category is specified
+            return em.createQuery(query).setParameter("category", category).getResultList();
+        }
+        else {
+            // No category is specified
+            return em.createQuery(query).getResultList();
+        }
+        
+        
+    }
+
 }

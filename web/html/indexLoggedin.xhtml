@@ -4,13 +4,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <body>
 
         <ui:composition template="./../template.xhtml">
 
             <ui:define name="top">
-                
+
             </ui:define>
 
             <ui:define name="content">
@@ -18,7 +19,7 @@
                     <h:link value="Login" outcome="html/login" /> <br></br>
                     <h:link value="Register" outcome="html/createUser" />
                 </h:panelGroup>
-                
+
 
                 <h:panelGroup rendered="#{not empty user}">
                     <p>Welcome, #{user.firstname}</p>
@@ -26,9 +27,28 @@
                         <h:commandButton value="logout" action="#{PersonView.logout}" />
                     </h:form>
                 </h:panelGroup>
+                <br></br>
+                <h:form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <h:inputText id="name" class="form-control" p:placeholder="Name of product" value="#{FilterView.filterProduct.name}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <h:selectOneMenu class="form-control" value="#{FilterView.filterProduct.category}">
+                                <f:selectItem itemValue="All categories" itemLabel="All categories"/>
+                                <f:selectItems value="#{product.allCategories}" var="c"
+                                               itemLabel="#{c}" itemValue="#{product.product.category}" />
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-4">
+                            <h:commandButton class="form-control" action="#{FilterView.filter()}" value="Search"/>
+                        </div>
+                    </div>
 
 
-                
+                </h:form>
+
+
                 <h1>Auction Place</h1>
 
                 <strong>Category Title</strong>
@@ -91,7 +111,7 @@
             </ui:define>
 
             <ui:define name="bottom">
-                
+
             </ui:define>
 
         </ui:composition>
