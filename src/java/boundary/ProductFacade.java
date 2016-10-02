@@ -7,6 +7,7 @@ package boundary;
 
 import entities.Product;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +18,9 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
+
+    @EJB
+    private BidFacade bidFacade;
 
     @PersistenceContext(unitName = "Assignment2_GoedPU")
     private EntityManager em;
@@ -41,6 +45,23 @@ public class ProductFacade extends AbstractFacade<Product> {
         super(Product.class);
     }
 
+    public List<Product>addCurrentHighestBid(List<Product> productList){
+        for (Product product : productList) {
+            //checken of product al bids heeft
+            if(!product.getBids().isEmpty()){
+                
+                Object currentHighest = this.getEntityManager().createNamedQuery("Bid.findHighestCurrentBid").setParameter("productID", product.getId()).getSingleResult();
+                product.setCurrentHighestBid((double)currentHighest);
+            }
+            else{
+                product.setCurrentHighestBid(product.getStartPrice());
+            }
+            
+            //shit
+            
+        }
+        return productList;
+    }
     public List<Product> getProductsPending() {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
         return results;

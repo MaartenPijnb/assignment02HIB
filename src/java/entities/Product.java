@@ -26,6 +26,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -65,6 +66,10 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     ArrayList<Bid> bids;
+    
+    @Transient
+    double currentHighestBid;
+    
 
     public Product() {
     }
@@ -91,6 +96,14 @@ public class Product implements Serializable {
 
     public void setMoment(Date moment) {
         this.moment = moment;
+    }
+
+    public double getCurrentHighestBid() {
+        return currentHighestBid;
+    }
+
+    public void setCurrentHighestBid(double currentHighestBid) {
+        this.currentHighestBid = currentHighestBid;
     }
 
     public Date getStartDate() {
