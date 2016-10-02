@@ -28,6 +28,17 @@ public class ProductFacade extends AbstractFacade<Product> {
         return em;
     }
 
+    private Product currentProduct;
+
+    public Product getCurrentProduct() {
+        return currentProduct;
+    }
+
+    public void setCurrentProduct(Product currentProduct) {
+        this.currentProduct = currentProduct;
+    }
+    
+    
     public ProductFacade() {
         super(Product.class);
     }
@@ -62,4 +73,13 @@ public class ProductFacade extends AbstractFacade<Product> {
         
     }
 
+    public List<Product> getProductsPending() {
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
+        return results;
+    }
+    
+    public List<Product> getProductsApproved() {
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
+        return results;
+    }
 }

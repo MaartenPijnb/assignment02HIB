@@ -27,4 +27,5 @@ $(document).ready(function () {
         $(".dateDeadline").on("dp.change", function (e) {
             $('.dateStart').data("DateTimePicker").maxDate(e.date);
         });
+
 });

@@ -21,6 +21,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +31,15 @@ import javax.persistence.TemporalType;
  *
  * @author Maarten
  */
+@NamedQueries({
+    @NamedQuery(
+            name = "Product.findByStatusPending",
+            query = "select p from Product p where p.status = entities.Status.PENDING"),
+    @NamedQuery(
+            name = "Product.findByStatusApproved",
+            query = "select p from Product p where p.status = entities.Status.APPROVED")
+})
+
 @Entity
 public class Product implements Serializable {
 

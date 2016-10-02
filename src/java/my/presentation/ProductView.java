@@ -44,6 +44,8 @@ public class ProductView {
     private List<Product> allProducts;
     private Product currentProduct;
     private Product product;
+    private List<Product> productsPending;
+    private List<Product> productsApproved;
 
     public ProductView() {
         this.product = new Product();
@@ -65,9 +67,18 @@ public class ProductView {
         this.file = file;
     }
 
+    public List<Product> getProductsPending() {
+        productsPending = productFacade.getProductsPending();
+        return productsPending;
+    }
     
+    public List<Product> getProductsApproved() {
+        productsApproved = productFacade.getProductsApproved();
+        return productsApproved;
+    }
+
     public void save() throws IOException {
-       //file.write("../img/halokes.jpg");
+        //file.write("../img/halokes.jpg");
     }
 
     public Status[] getAllStatus() {
@@ -86,15 +97,28 @@ public class ProductView {
         return product;
     }
 
-     public Product getCurrentProduct() {
+    public Product getCurrentProduct() {
         return currentProduct;
     }
-    public String toDetail(String id){
+
+    public String toDetail(String id) {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
         currentProduct = productFacade.find(tempProduct.getId());
+        //set the currentproduct in productfacade
+        productFacade.setCurrentProduct(currentProduct);
         return "productDetail";
     }
+    
+    public String approveProduct(String id) {
+        Product tempProduct = new Product();
+        tempProduct.setId(Long.parseLong(id));
+        currentProduct = productFacade.find(tempProduct.getId());
+        currentProduct.setStatus(Status.APPROVED);
+        productFacade.edit(currentProduct);
+        return "/html/approveEntries";
+    }
+
     public String postProduct() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Date date = new Date();
@@ -103,4 +127,7 @@ public class ProductView {
         this.productFacade.create(product);
         return "theend";
     }
+    
+    
+
 }
