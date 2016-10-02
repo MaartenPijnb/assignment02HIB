@@ -44,12 +44,13 @@ public class PersonView {
         // By default it is impossible for registered accounts to be admins
         person.setAccountLevel(0);
         this.personFacade.create(person);
+        
         return "/index";
     }
     
     public String login(){
         if (personFacade.checkLogin(person.getEmail(), person.getPassword())) {
-            return "/index";
+            return "indexLoggedin";
         }
         else {
             FacesContext
@@ -66,7 +67,7 @@ public class PersonView {
     
     public String logout(){
         this.personFacade.logout();
-        return "index";
+        return "/index";
     }
     
 }
