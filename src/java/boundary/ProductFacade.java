@@ -6,6 +6,7 @@
 package boundary;
 
 import entities.Product;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,14 @@ public class ProductFacade extends AbstractFacade<Product> {
     public ProductFacade() {
         super(Product.class);
     }
+
+    public List<Product> getProductsPending() {
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
+        return results;
+    }
     
+    public List<Product> getProductsApproved() {
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
+        return results;
+    }
 }
