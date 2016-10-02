@@ -22,9 +22,7 @@
                         class="glyphicon glyphicon-th"></span>Grid</a>
 
                 <div id="products" class="row list-group">
-                    <c:choose>
-                        <c:when test="#{product.productsPending.size() != 0}">
-                            <c:forEach var="item" items="#{product.productsPending}">
+                    <c:forEach var="item" items="#{product.allProducts}">
 
                                 <div class="item  col-xs-4 col-lg-4">
                                     <div class="thumbnail">
@@ -48,7 +46,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <h:form>
-                                                        <h:commandButton value="Approve" class="btn btn-success" action="#{product.approveProduct(item.id)}" />
+                                                        <h:commandButton value="Delete" class="btn btn-success" action="#{product.deleteProduct(item.id)}" />
                                                     </h:form>
 
 
@@ -58,11 +56,6 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <p>There are no new entries.</p>
-                        </c:otherwise>
-                    </c:choose>
 
 
 

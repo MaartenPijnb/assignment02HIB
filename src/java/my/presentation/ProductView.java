@@ -71,7 +71,7 @@ public class ProductView {
         productsPending = productFacade.getProductsPending();
         return productsPending;
     }
-    
+
     public List<Product> getProductsApproved() {
         productsApproved = productFacade.getProductsApproved();
         return productsApproved;
@@ -109,7 +109,15 @@ public class ProductView {
         productFacade.setCurrentProduct(currentProduct);
         return "productDetail";
     }
-    
+
+    public String deleteProduct(String id) {
+        Product tempProduct = new Product();
+        tempProduct.setId(Long.parseLong(id));
+        currentProduct = productFacade.find(tempProduct.getId());
+        productFacade.remove(currentProduct);
+        return "theend";
+    }
+
     public String approveProduct(String id) {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
@@ -127,7 +135,5 @@ public class ProductView {
         this.productFacade.create(product);
         return "theend";
     }
-    
-    
 
 }
