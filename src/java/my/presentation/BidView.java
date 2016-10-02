@@ -79,7 +79,7 @@ public class BidView {
         this.bidFacade.create(bid);
         //productBean.toDetail(productFacade.getCurrentProduct().getId().toString());
         message= "Your bidding is registered.";
-        return "indexLoggedin";
+        return "/html/productDetail";
     }
     
     public String postInstantBuy(){

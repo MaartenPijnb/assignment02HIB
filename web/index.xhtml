@@ -11,21 +11,9 @@
 
 
             <ui:define name="content">
-                <h:panelGroup rendered="#{empty user}">
-                    <h:link value="Login" outcome="html/login" /> <br></br>
-                    <h:link value="Register" outcome="html/createUser" />
-                </h:panelGroup>
-                
-
-                <h:panelGroup rendered="#{not empty user}">
-                    <p>Welcome, #{user.firstname}</p>
-                    <h:form>
-                        <h:commandButton value="logout" action="#{PersonView.logout}" />
-                    </h:form>
-                </h:panelGroup>
 
 
-                
+
                 <h1>Auction Place</h1>
 
                 <strong>Category Title</strong>
@@ -59,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
                                             <p class="lead">
-                                                €#{item.currentHighestBid}</p>
+                                                €#{item.startPrice}</p>
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <h:form>
@@ -79,17 +67,10 @@
 
 
                 </div>
-
-
-
-                <f:view>
-                    <h:link value="Create new productentry" outcome="html/createProduct" />
-                    <h:link value="Approve productentry" outcome="html/approveEntries" />
-                </f:view>
             </ui:define>
 
             <ui:define name="bottom">
-                
+
             </ui:define>
 
         </ui:composition>
