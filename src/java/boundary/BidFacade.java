@@ -5,7 +5,7 @@
  */
 package boundary;
 
-import entities.Product;
+import entities.Bid;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author maart
  */
 @Stateless
-public class ProductFacade extends AbstractFacade<Product> {
+public class BidFacade extends AbstractFacade<Bid> {
 
     @PersistenceContext(unitName = "Assignment2_GoedPU")
     private EntityManager em;
@@ -25,19 +25,9 @@ public class ProductFacade extends AbstractFacade<Product> {
         return em;
     }
 
-    private Product currentProduct;
-
-    public Product getCurrentProduct() {
-        return currentProduct;
-    }
-
-    public void setCurrentProduct(Product currentProduct) {
-        this.currentProduct = currentProduct;
+    public BidFacade() {
+        super(Bid.class);
     }
     
-    
-    public ProductFacade() {
-        super(Product.class);
-    }
     
 }

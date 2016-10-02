@@ -93,6 +93,8 @@ public class ProductView {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
         currentProduct = productFacade.find(tempProduct.getId());
+        //set the currentproduct in productfacade
+        productFacade.setCurrentProduct(currentProduct);
         return "productDetail";
     }
     public String postProduct() {
@@ -103,4 +105,7 @@ public class ProductView {
         this.productFacade.create(product);
         return "theend";
     }
+    
+    
+
 }

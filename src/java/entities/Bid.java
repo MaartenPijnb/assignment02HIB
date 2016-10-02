@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,8 +34,8 @@ public class Bid implements Serializable {
     private Double price, maxAutoPrice;
     private Boolean isAccepted;
     
-    @Temporal(TemporalType.DATE)
-    GregorianCalendar moment;
+    @Temporal(TemporalType.TIMESTAMP)
+    Date moment;
     
     @ManyToOne
     private Person bidder;
@@ -76,11 +77,11 @@ public class Bid implements Serializable {
         this.isAccepted = isAccepted;
     }
 
-    public GregorianCalendar getMoment() {
+    public Date getMoment() {
         return moment;
     }
 
-    public void setMoment(GregorianCalendar moment) {
+    public void setMoment(Date moment) {
         this.moment = moment;
     }
 
