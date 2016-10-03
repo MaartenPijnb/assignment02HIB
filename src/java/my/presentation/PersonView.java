@@ -59,7 +59,7 @@ public class PersonView {
     
     public String login(){
         if (personFacade.checkLogin(person.getEmail(), person.getPassword())) {
-            return "indexLoggedin";
+            return "/index";
         }
         else {
             FacesContext

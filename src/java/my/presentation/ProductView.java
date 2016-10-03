@@ -23,6 +23,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.Part;
+import other.FilterProduct;
 
 /**
  *
@@ -46,9 +47,14 @@ public class ProductView {
     private Product product;
     private List<Product> productsPending;
     private List<Product> productsApproved;
+    private FilterProduct filterProduct;
+    
+    // For filtering
+    private boolean isFilter = false;
 
     public ProductView() {
         this.product = new Product();
+        this.filterProduct = new  FilterProduct();
     }
 
     @PostConstruct
@@ -74,7 +80,13 @@ public class ProductView {
     }
 
     public List<Product> getProductsApproved() {
-        productsApproved = productFacade.getProductsApproved();
+        if (!isFilter) {
+            productsApproved = productFacade.getProductsApproved();
+        }
+        else {
+            productsApproved = productFacade.filter(this.filterProduct);
+        }
+        
         productsApproved = productFacade.addCurrentHighestBid(productsApproved);
         return productsApproved;
     }
@@ -102,6 +114,16 @@ public class ProductView {
     public Product getCurrentProduct() {
         return currentProduct;
     }
+
+    public FilterProduct getFilterProduct() {
+        return filterProduct;
+    }
+
+    public void setFilterProduct(FilterProduct filterProduct) {
+        this.filterProduct = filterProduct;
+    }
+    
+    
 
     public String toDetail(String id) {
         Product tempProduct = new Product();
@@ -137,5 +159,15 @@ public class ProductView {
         this.productFacade.create(product);
         return "theend";
     }
+
+    public void setProductsApproved(List<Product> productsApproved) {
+        this.productsApproved = productsApproved;
+    }
+    
+    public void filter() {
+        isFilter = true; 
+    }
+    
+    
 
 }
