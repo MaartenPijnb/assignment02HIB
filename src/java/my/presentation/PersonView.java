@@ -48,6 +48,15 @@ public class PersonView {
         return "/index";
     }
     
+    public String updatePerson(String id){
+        Person tempPerson = new Person();
+        tempPerson.setId(Long.parseLong(id));
+        person = personFacade.find(tempPerson.getId());
+        this.personFacade.edit(person);
+        
+        return "/index";
+    }
+    
     public String login(){
         if (personFacade.checkLogin(person.getEmail(), person.getPassword())) {
             return "indexLoggedin";
