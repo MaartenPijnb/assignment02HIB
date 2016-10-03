@@ -54,7 +54,8 @@ public class ProductView {
     @PostConstruct
     public void init() {
         allCategories = Category.values();
-        allProducts = productFacade.findAll();
+//        allProducts = productFacade.findAll();
+//        allProducts = productFacade.addCurrentHighestBid(allProducts);
     }
 
     private Part file; // +getter+setter
@@ -74,6 +75,7 @@ public class ProductView {
 
     public List<Product> getProductsApproved() {
         productsApproved = productFacade.getProductsApproved();
+        productsApproved = productFacade.addCurrentHighestBid(productsApproved);
         return productsApproved;
     }
 

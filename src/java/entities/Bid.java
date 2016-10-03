@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,6 +22,13 @@ import javax.persistence.TemporalType;
  *
  * @author Maarten
  */
+@NamedQueries({
+    @NamedQuery(
+            name = "Bid.findHighestCurrentBid",
+            query = "select MAX(b.price) from Bid b where b.product.id = :productID ")
+ 
+})
+
 @Entity
 public class Bid implements Serializable {
 /* Maarten Pijnenborg is ne KODER */
