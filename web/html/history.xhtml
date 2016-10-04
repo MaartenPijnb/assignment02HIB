@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+            <ui:define name="content">
+                <h1>My product history</h1>
+                <h3>Published products</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Date published</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach var="item" items="#{user.products}">
+                        <tr>
+                            <td><h:outputText value="#{item.moment}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                </h:outputText>
+                            </td>
+                            <td>#{item.name}</td>
+                            <td>#{item.category}</td>
+                            <td>#{item.status}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <h3>Bids on products</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Moment</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Seller</th>
+                        <th>Accepted?</th>
+                    </tr>
+                    <c:forEach var="bid" items="#{user.bids}">
+                        <tr>
+                            <td><h:outputText value="#{bid.moment}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                </h:outputText>
+                            </td>
+                            <td>#{bid.product.name}</td>
+                            <td>
+                                <h:outputText value="#{bid.price}" >
+                                    <f:convertNumber currencyCode="NOK" type="currency" />
+                                </h:outputText>
+                            </td>
+                            <td>#{bid.product.seller.firstname} #{bid.product.seller.lastname}</td>
+                            <td>
+                                <h:outputText value="Yes" rendered="#{bid.isAccepted == true}"></h:outputText>
+                                <h:outputText value="No" rendered="#{bid.isAccepted != true}"></h:outputText>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
