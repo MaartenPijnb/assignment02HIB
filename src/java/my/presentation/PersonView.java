@@ -35,7 +35,11 @@ public class PersonView {
     
     
     private Person person;
-
+    private Person currentPerson;
+    
+    public Person getCurrentPerson(){
+        return personFacade.getCurrentUser();
+    }
     public Person getPerson() {
         return person;
     }

@@ -103,4 +103,6 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
         return results;
     }
+    
+    
 }

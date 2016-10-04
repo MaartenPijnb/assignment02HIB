@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +26,15 @@ public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String feedback;
+    
     private Double rating;
-    @Temporal (TemporalType.DATE)
-    private GregorianCalendar date;
+
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date moment;
     
     @ManyToOne
     private Person giver;
@@ -57,13 +61,15 @@ public class Rating implements Serializable {
         this.rating = rating;
     }
 
-    public GregorianCalendar getDate() {
-        return date;
+    public Date getMoment() {
+        return moment;
     }
 
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
+    public void setMoment(Date moment) {
+        this.moment = moment;
     }
+
+
 
     public Person getGiver() {
         return giver;

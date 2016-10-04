@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -25,6 +26,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -44,6 +46,7 @@ public class BidView {
     private BidFacade bidFacade;
 
     private Bid bid;
+  
 
     private String message;
 //    @ManagedProperty(value = "#{product}")
@@ -57,6 +60,13 @@ public class BidView {
     /**
      * Creates a new instance of BidView
      */
+    
+    public List<Bid> getSelledBids(){
+        //get userID from loggedin user
+        List<Bid> test = bidFacade.getSoldBids();
+        return bidFacade.getSoldBids();
+    }
+    
     public BidView() {
         this.bid = new Bid();
     }
@@ -93,7 +103,7 @@ public class BidView {
         bid.setProduct(productFacade.getCurrentProduct());
         bid.setIsAccepted(Boolean.TRUE);
         bid.setPrice(currentProduct.getSellPrice());
-
+      
     
         this.bidFacade.create(bid);
         
@@ -103,7 +113,7 @@ public class BidView {
         currentProduct.setStatus(Status.SOLD);
         productFacade.edit(currentProduct);
         message="You succesfully bought the product.";
-        return "index";
+        return "/index";
     }
 
 }

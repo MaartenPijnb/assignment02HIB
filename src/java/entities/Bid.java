@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(
             name = "Bid.findHighestCurrentBid",
             query = "select MAX(b.price) from Bid b where b.product.id = :productID ")
+    
  
 })
 

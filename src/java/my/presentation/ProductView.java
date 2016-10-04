@@ -5,6 +5,7 @@
  */
 package my.presentation;
 
+import boundary.PersonFacade;
 import boundary.ProductFacade;
 import entities.Category;
 import entities.Product;
@@ -34,7 +35,12 @@ import other.FilterProduct;
 public class ProductView {
 
     @EJB
+    private PersonFacade personFacade;
+
+    @EJB
     private ProductFacade productFacade;
+    
+    
 
     /**
      * Creates a new instance of ProductView
@@ -139,7 +145,7 @@ public class ProductView {
         tempProduct.setId(Long.parseLong(id));
         currentProduct = productFacade.find(tempProduct.getId());
         productFacade.remove(currentProduct);
-        return "theend";
+        return "/index";
     }
 
     public String approveProduct(String id) {
@@ -156,8 +162,10 @@ public class ProductView {
         Date date = new Date();
         product.setMoment(date);
         product.setStatus(Status.PENDING); //hardcoded?
+        //get currentuser
+        product.setSeller(personFacade.getCurrentUser());
         this.productFacade.create(product);
-        return "theend";
+        return "/index";
     }
 
     public void setProductsApproved(List<Product> productsApproved) {
