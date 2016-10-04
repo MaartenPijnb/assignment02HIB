@@ -87,7 +87,7 @@ public class ProductView {
             productsApproved = productFacade.filter(this.filterProduct);
         }
         
-        productsApproved = productFacade.addCurrentHighestBid(productsApproved);
+       // productsApproved = productFacade.addCurrentHighestBid(productsApproved);
         return productsApproved;
     }
 
@@ -131,7 +131,7 @@ public class ProductView {
         currentProduct = productFacade.find(tempProduct.getId());
         //set the currentproduct in productfacade
         productFacade.setCurrentProduct(currentProduct);
-        return "productDetail";
+        return "/html/productDetail";
     }
 
     public String deleteProduct(String id) {

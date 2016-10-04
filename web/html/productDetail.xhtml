@@ -16,12 +16,19 @@
 
             <ui:define name="content">
                 De ingelogde gebruijker is #{user.firstname} met id #{user.id} 
-                <h1> ${product.currentProduct.name} </h1>
+                <h1> #{product.currentProduct.name} </h1>
                 <strong>Category</strong>
-                ${product.currentProduct.category}
+                #{product.currentProduct.category}
                 <br></br>
                 <strong>Description:</strong>
-                ${product.currentProduct.description}
+                #{product.currentProduct.description}
+                <br></br>
+                <strong>Current highest bid:</strong>
+                <h:outputText value="#{product.currentProduct.currentHighestBid}" >
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                    </h:outputText>
+      
+                
                 <h:form class="form-horizontal">
 
                     <div class="form-group">
@@ -38,7 +45,12 @@
 
                         </div>
                         <div class="col-md-2">
-                            <h:outputLabel value="Buy instantly for #{product.currentProduct.sellPrice}"/>
+                            Buy instantly for 
+                            <h:outputText value="#{product.currentProduct.sellPrice}">
+                         
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                            </h:outputText>
+                                                    
                         </div>
 
                         <div class="col-md-2">
@@ -52,9 +64,17 @@
                     <tr>
                         <td>  <img  src="#{request.contextPath}/resources/img/antonTank.png" alt="" /></td>
                         <td height="400px"><strong>Bidding expires on :</strong> ${product.currentProduct.deadline.toGMTString()}
-                            <p><strong> Instant sell price:</strong> ${product.currentProduct.sellPrice}€<br></br>
-                                <strong> Start bidprice:</strong> ${product.currentProduct.startPrice}€<br></br>
-                                <strong> Interval price:</strong> ${product.currentProduct.intervalPrice}€<br></br>
+                            <p>
+                                <strong> Start bidprice:</strong> 
+                                <h:outputText value="#{product.currentProduct.startPrice}" >
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                    </h:outputText>
+                              <br></br>
+                                <strong> Interval price:</strong> 
+                                <h:outputText value="${product.currentProduct.intervalPrice}" >
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                    </h:outputText>
+                                €<br></br>
                             </p>
                         </td>
                     </tr>
@@ -73,7 +93,9 @@
                                     <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                                 </h:outputText></td>
                             <td>#{item.bidder.fullname}</td>
-                            <td>#{item.price}</td>
+                            <td> <h:outputText value="${item.price}" >
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                    </h:outputText></td>
                         </tr>
                     </c:forEach>
 

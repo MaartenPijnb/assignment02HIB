@@ -103,7 +103,7 @@ public class BidView {
         currentProduct.setStatus(Status.SOLD);
         productFacade.edit(currentProduct);
         message="You succesfully bought the product.";
-        return "indexLoggedin";
+        return "index";
     }
 
 }

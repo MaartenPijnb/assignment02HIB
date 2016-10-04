@@ -40,6 +40,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public void setCurrentProduct(Product currentProduct) {
+        currentProduct= addCurrentHighestBid(currentProduct);
         this.currentProduct = currentProduct;
     }
 
@@ -77,9 +78,9 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     }
 
-    public List<Product> addCurrentHighestBid(List<Product> productList) {
-        for (Product product : productList) {
-            //checken of product al bids heeft
+    public Product addCurrentHighestBid(Product product) {
+      
+            //check if product already has a bid
             if (!product.getBids().isEmpty()) {
 
                 Object currentHighest = this.getEntityManager().createNamedQuery("Bid.findHighestCurrentBid").setParameter("productID", product.getId()).getSingleResult();
@@ -88,9 +89,9 @@ public class ProductFacade extends AbstractFacade<Product> {
                 product.setCurrentHighestBid(product.getStartPrice());
             }
 
-            //shit
-        }
-        return productList;
+            
+        
+        return product;
     }
 
     public List<Product> getProductsPending() {
