@@ -6,6 +6,10 @@
 package boundary;
 
 import entities.Bid;
+import entities.Person;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +20,9 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class BidFacade extends AbstractFacade<Bid> {
+
+    @EJB
+    private PersonFacade personFacade;
 
     @PersistenceContext(unitName = "Assignment2_GoedPU")
     private EntityManager em;
@@ -28,6 +35,18 @@ public class BidFacade extends AbstractFacade<Bid> {
     public BidFacade() {
         super(Bid.class);
     }
-    
-    
+
+    public List<Bid> getSoldBids() {
+        //get userID from loggedin user
+        List<Bid>selledBids = new ArrayList<>();
+        Person currentUser = personFacade.getCurrentUser();
+        currentUser.getBids().stream().forEach((item) -> {
+            //check if bid is sold then add it to the bid list
+            if(item.getIsAccepted()){
+                selledBids.add(item);
+            }
+            
+        });
+        return selledBids;
+    }
 }
