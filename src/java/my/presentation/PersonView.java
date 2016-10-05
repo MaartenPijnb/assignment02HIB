@@ -28,6 +28,7 @@ public class PersonView {
      */
     public PersonView() {
         this.person = new Person();
+        updatePerson = new Person();
     }
     
     @EJB
@@ -35,6 +36,11 @@ public class PersonView {
     
     
     private Person person;
+    private Person updatePerson;
+
+    public Person getUpdatePerson() {
+        return updatePerson;
+    }
 
     public Person getPerson() {
         return person;
@@ -48,12 +54,14 @@ public class PersonView {
         return "/index";
     }
     
-    public String updatePerson(String id){
+    public String updateProfile(String id){
         Person tempPerson = new Person();
+        Person person2 = new Person();
         tempPerson.setId(Long.parseLong(id));
-        person = personFacade.find(tempPerson.getId());
-        this.personFacade.edit(person);
-        
+        person2 = personFacade.find(tempPerson.getId());
+        person.setId(Long.parseLong(id));
+        person.setEmail(person2.getEmail());
+        personFacade.edit(person);       
         return "/index";
     }
     

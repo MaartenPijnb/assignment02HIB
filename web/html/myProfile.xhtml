@@ -25,7 +25,7 @@
                                 <h:outputLabel class="control-label" value="Firstname"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputText id="firstname" class="form-control" value="#{user.firstname}">
+                                <h:inputText id="firstname" class="form-control" value="#{PersonView.person.firstname}">
                                     <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
                                 <h:message for="firstname" style="color:red" />
@@ -39,7 +39,7 @@
                                 <h:outputLabel value="Lastname"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputText id="lastname" class="form-control"  value="#{user.lastname}">
+                                <h:inputText id="lastname" class="form-control"  value="#{PersonView.person.lastname}">
                                     <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
                                 <h:message for="lastname" style="color:red" />
@@ -51,9 +51,7 @@
                                 <h:outputLabel value="Email"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputText id="email" class="form-control" value="#{user.email}">
-                                    <f:validator binding="#{EmailValidator}"/>
-
+                                <h:inputText disabled="true" id="email" class="form-control" value="#{user.email}">
                                 </h:inputText>
                                 <h:message for="email" style="color:red" />
                             </div>
@@ -64,7 +62,7 @@
                                 <h:outputLabel value="Phone"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputText id="phone" class="form-control" value="#{user.phone}">
+                                <h:inputText id="phone" class="form-control" value="#{PersonView.person.phone}">
                                     <f:validator validatorId="PersonValidator"/>
                                 </h:inputText>
                                 <h:message for="phone" style="color:red" />
@@ -76,7 +74,7 @@
                                 <h:outputLabel value="New password"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputSecret id="password" class="form-control" value="#{user.password}">
+                                <h:inputSecret id="password" class="form-control" value="#{PersonView.person.password}">
                                     <f:validator validatorId="PersonValidator"/>
                                 </h:inputSecret>
                                 <h:message for="password" style="color:red" />
@@ -85,7 +83,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-6">
-                                <h:commandButton class="form-control" action="#{PersonView.updatePerson(user.id)}" value="Change profile settings"/>
+                                <h:commandButton class="form-control" action="#{PersonView.updateProfile(user.id)}" value="Change profile settings"/>
                             </div>
                         </div>
 
