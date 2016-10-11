@@ -25,7 +25,7 @@
                 <br></br>
                 <strong>Current highest bid:</strong>
                 <h:outputText value="#{product.currentProduct.currentHighestBid}" >
-                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                         <f:convertNumber currencyCode="NOK" type="currency" />
                                                     </h:outputText>
       
                 
@@ -48,7 +48,7 @@
                             Buy instantly for 
                             <h:outputText value="#{product.currentProduct.sellPrice}">
                          
-                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                         <f:convertNumber currencyCode="NOK" type="currency" />
                             </h:outputText>
                                                     
                         </div>
@@ -67,7 +67,7 @@
                             <p>
                                 <strong> Start bidprice:</strong> 
                                 <h:outputText value="#{product.currentProduct.startPrice}" >
-                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                         <f:convertNumber currencyCode="NOK" type="currency" />
                                                     </h:outputText>
                               <br></br>
                                
@@ -92,7 +92,7 @@
                                 </h:outputText></td>
                             <td>#{item.bidder.fullname}</td>
                             <td> <h:outputText value="${item.price}" >
-                                                         <f:convertNumber currencyCode="EUR" type="currency" />
+                                                         <f:convertNumber currencyCode="NOK" type="currency" />
                                                     </h:outputText></td>
                         </tr>
                     </c:forEach>

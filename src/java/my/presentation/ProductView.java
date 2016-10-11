@@ -8,6 +8,7 @@ package my.presentation;
 import boundary.PersonFacade;
 import boundary.ProductFacade;
 import entities.Category;
+import entities.Person;
 import entities.Product;
 import entities.Rating;
 
@@ -25,6 +26,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import other.FilterProduct;
 
@@ -84,7 +86,6 @@ public class ProductView {
         productsPending = productFacade.getProductsPending();
         return productsPending;
     }
-  
 
     public List<Product> getProductsApproved() {
 
@@ -93,7 +94,7 @@ public class ProductView {
         } else {
             productsApproved = productFacade.filter(this.filterProduct);
         }
-      
+
         // productsApproved = productFacade.addCurrentHighestBid(productsApproved);
         return productsApproved;
     }
@@ -131,13 +132,23 @@ public class ProductView {
     }
 
     public String toDetail(String id) {
-        Product tempProduct = new Product();
-        tempProduct.setId(Long.parseLong(id));
-        currentProduct = productFacade.find(tempProduct.getId());
-        //set the currentproduct in productfacade
-        productFacade.setCurrentProduct(currentProduct);
-        productFacade.addRatingToSeller(currentProduct);
-        return "/html/productDetail";
+        
+        // Check if user is logged in, if the user session exists redirect to detail page. If not redirect to index.
+        FacesContext context = FacesContext.getCurrentInstance();
+        Person user = (Person) context.getExternalContext().getSessionMap().get("user");
+
+        if (user == null) {
+            return "/index";
+        } else {
+            Product tempProduct = new Product();
+            tempProduct.setId(Long.parseLong(id));
+            currentProduct = productFacade.find(tempProduct.getId());
+            //set the currentproduct in productfacade
+            productFacade.setCurrentProduct(currentProduct);
+            productFacade.addRatingToSeller(currentProduct);
+            return "/html/productDetail";
+        }
+
     }
 
     public String deleteProduct(String id) {
