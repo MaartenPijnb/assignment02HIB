@@ -136,6 +136,7 @@ public class ProductView {
         currentProduct = productFacade.find(tempProduct.getId());
         //set the currentproduct in productfacade
         productFacade.setCurrentProduct(currentProduct);
+        productFacade.addRatingToSeller(currentProduct);
         return "/html/productDetail";
     }
 
