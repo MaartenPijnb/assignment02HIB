@@ -22,8 +22,6 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class PersonView {
 
-    
-
     /**
      * Creates a new instance of PersonView
      */
@@ -31,16 +29,15 @@ public class PersonView {
         this.person = new Person();
         updatePerson = new Person();
     }
-    
+
     @EJB
     private PersonFacade personFacade;
-    
+
     private List<Person> allPersons;
     private Person person;
     private Person currentPerson;
-    
-    
-    public Person getCurrentPerson(){
+
+    public Person getCurrentPerson() {
         return personFacade.getCurrentUser();
     }
     private Person updatePerson;
@@ -48,7 +45,7 @@ public class PersonView {
     public Person getUpdatePerson() {
         return updatePerson;
     }
-    
+
     public List<Person> getAllPersons() {
         allPersons = personFacade.findAll();
         return allPersons;
@@ -57,20 +54,20 @@ public class PersonView {
     public Person getPerson() {
         return person;
     }
-    
-    public String postPerson(){
+
+    public String postPerson() {
         // By default it is impossible for registered accounts to be admins
         person.setAccountLevel(0);
         this.personFacade.create(person);
-        
+
         return "/index";
     }
-    
-    public String updateProfile(){
-        personFacade.edit(currentPerson);       
+
+    public String updateProfile() {
+        personFacade.edit(currentPerson);
         return "/index";
     }
-    
+
     public String toDetail(String id) {
         Person tempPerson = new Person();
         tempPerson.setId(Long.parseLong(id));
@@ -79,21 +76,29 @@ public class PersonView {
         personFacade.setCurrentPerson(currentPerson);
         return "/html/myProfile";
     }
-    
-    public String toAdminDetail(String id) {
+
+    public String makeAdmin(String id) {
         Person tempPerson = new Person();
         tempPerson.setId(Long.parseLong(id));
         currentPerson = personFacade.find(tempPerson.getId());
-        //set the current person in personfacade
-        personFacade.setCurrentPerson(currentPerson);
-        return "/html/editProfile";
+        currentPerson.setAccountLevel(1);
+        personFacade.edit(currentPerson);
+        return "/html/manageUsers";
     }
-    
-    public String login(){
+
+    public String removeAdmin(String id) {
+        Person tempPerson = new Person();
+        tempPerson.setId(Long.parseLong(id));
+        currentPerson = personFacade.find(tempPerson.getId());
+        currentPerson.setAccountLevel(0);
+        personFacade.edit(currentPerson);
+        return "/html/manageUsers";
+    }
+
+    public String login() {
         if (personFacade.checkLogin(person.getEmail(), person.getPassword())) {
             return "/index";
-        }
-        else {
+        } else {
             FacesContext
                     .getCurrentInstance()
                     .addMessage(
@@ -105,10 +110,10 @@ public class PersonView {
             return null;
         }
     }
-    
-    public String logout(){
+
+    public String logout() {
         this.personFacade.logout();
         return "/index";
     }
-    
+
 }

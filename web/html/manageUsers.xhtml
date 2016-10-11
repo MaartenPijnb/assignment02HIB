@@ -29,9 +29,20 @@
                             <td>#{item.phone}</td>
                             <td>#{item.accountLevel}</td>
                             <td>
-                                <h:form>
-                                    <h:commandLink value="Edit profile" action="#{PersonView.toAdminDetail(item.id)}" />
-                                </h:form>
+                                <c:if test="#{item.id == 151}">
+                                    This is the main admin, status cannot be changed
+                                </c:if>
+                                <c:if test="#{item.accountLevel == 0}">
+                                    <h:form>
+                                        <h:commandLink value="Make admin" action="#{PersonView.makeAdmin(item.id)}" />
+                                    </h:form>
+                                </c:if>
+                                <c:if test="#{(item.accountLevel == 1)  and !(item.id == 151)}">
+                                    <h:form>
+                                        <h:commandLink value="Remove admin status" action="#{PersonView.removeAdmin(item.id)}" />
+                                    </h:form>
+                                </c:if>
+                                
                             </td>
                         </tr>
                     </c:forEach>
