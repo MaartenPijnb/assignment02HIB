@@ -55,11 +55,7 @@
                                             <li><h:link value="Create new user" outcome="/html/createUser" /></li>
                                             <li><h:link value="Approve productentry" outcome="/html/approveEntries" /></li>
                                             <li><h:link value="Delete productentry" outcome="/html/deleteEntries" /></li>
-                                            <!--                                    <li><a href="#">Something else here</a></li>
-                                                                                <li role="separator" class="divider"></li>
-                                                                                <li class="dropdown-header">Nav header</li>
-                                                                                <li><a href="#">Separated link</a></li>
-                                                                                <li><a href="#">One more separated link</a></li>-->
+                                            <li><h:link value="Manage users" outcome="/html/manageUsers" /></li>
                                         </ul>
                                     </li>
                                 </c:if>
@@ -75,8 +71,12 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{user.firstname} #{user.lastname}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><h:link value="My profile" outcome="/html/myProfile" /></li>
-                                            <li><h:link value="My bids" outcome="/html/deleteEntries" /></li>
+                                            <!--                                            <li><h:link value="My profile" outcome="/html/myProfile" /></li>-->
+                                            <li>
+                                                <h:form>
+                                                    <h:commandLink value="My profile" action="#{PersonView.toDetail(user.id)}" />
+                                                </h:form>
+                                            </li>
                                             <li><h:link value="My product history" outcome="/html/history" /></li>
                                             <li><h:link value="Rate seller" outcome="/html/rateSeller" /></li>
                                             <li>

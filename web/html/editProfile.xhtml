@@ -6,7 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-
     <body>
 
         <ui:composition template="./../template.xhtml">
@@ -15,7 +14,7 @@
             </ui:define>
 
             <ui:define name="content">
-                <f:view>
+                 <f:view>
                     <h:form class="form-horizontal">
 
                         <div class="form-group">
@@ -69,15 +68,13 @@
 
                         <div class="form-group">
                             <div class="col-md-5">
-                                <h:outputLabel value="New password"/>
+                                <h:outputLabel value="Admin"/>
                             </div>
                             <div class="col-md-6 col-md-offset-1">
-                                <h:inputSecret id="password" class="form-control" value="#{PersonView.currentPerson.password}">
-                                    <f:validator validatorId="PersonValidator"/>
-                                </h:inputSecret>
-                                <h:message for="password" style="color:red" />
+                                <h:selectBooleanCheckbox id="accountLevel" value="checked" />
                             </div>
                         </div>
+                        
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-6">

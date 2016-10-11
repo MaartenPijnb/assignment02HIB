@@ -7,6 +7,7 @@ package my.presentation;
 
 import boundary.PersonFacade;
 import entities.Person;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -34,9 +35,10 @@ public class PersonView {
     @EJB
     private PersonFacade personFacade;
     
-    
+    private List<Person> allPersons;
     private Person person;
     private Person currentPerson;
+    
     
     public Person getCurrentPerson(){
         return personFacade.getCurrentUser();
@@ -45,6 +47,11 @@ public class PersonView {
 
     public Person getUpdatePerson() {
         return updatePerson;
+    }
+    
+    public List<Person> getAllPersons() {
+        allPersons = personFacade.findAll();
+        return allPersons;
     }
 
     public Person getPerson() {
@@ -59,15 +66,27 @@ public class PersonView {
         return "/index";
     }
     
-    public String updateProfile(String id){
-        Person tempPerson = new Person();
-        Person person2 = new Person();
-        tempPerson.setId(Long.parseLong(id));
-        person2 = personFacade.find(tempPerson.getId());
-        person.setId(Long.parseLong(id));
-        person.setEmail(person2.getEmail());
-        personFacade.edit(person);       
+    public String updateProfile(){
+        personFacade.edit(currentPerson);       
         return "/index";
+    }
+    
+    public String toDetail(String id) {
+        Person tempPerson = new Person();
+        tempPerson.setId(Long.parseLong(id));
+        currentPerson = personFacade.find(tempPerson.getId());
+        //set the current person in personfacade
+        personFacade.setCurrentPerson(currentPerson);
+        return "/html/myProfile";
+    }
+    
+    public String toAdminDetail(String id) {
+        Person tempPerson = new Person();
+        tempPerson.setId(Long.parseLong(id));
+        currentPerson = personFacade.find(tempPerson.getId());
+        //set the current person in personfacade
+        personFacade.setCurrentPerson(currentPerson);
+        return "/html/editProfile";
     }
     
     public String login(){
