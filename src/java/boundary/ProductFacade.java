@@ -111,7 +111,7 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     public List<Product> getProductsApproved() {
         Date c = new Date();
-        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").setParameter("currentDate", this).getResultList();
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
         return results;
     }
 

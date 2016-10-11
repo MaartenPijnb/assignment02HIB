@@ -38,7 +38,7 @@ import javax.persistence.Transient;
             query = "select p from Product p where p.status = entities.Status.PENDING"),
     @NamedQuery(
             name = "Product.findByStatusApproved",
-            query = "select p from Product p where p.startdate <= :currentDate AND p.deadline >= :currentDate")
+            query = "select p from Product p where current_date between p.startDate and p.deadline")
 })
 
 @Entity
