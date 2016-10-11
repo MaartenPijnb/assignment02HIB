@@ -38,15 +38,15 @@ public class BidFacade extends AbstractFacade<Bid> {
 
     public List<Bid> getSoldBids() {
         //get userID from loggedin user
-        List<Bid>selledBids = new ArrayList<>();
+        List<Bid>soldBids = new ArrayList<>();
         Person currentUser = personFacade.getCurrentUser();
         currentUser.getBids().stream().forEach((item) -> {
             //check if bid is sold then add it to the bid list
             if(item.getIsAccepted()){
-                selledBids.add(item);
+                soldBids.add(item);
             }
             
         });
-        return selledBids;
+        return soldBids;
     }
 }

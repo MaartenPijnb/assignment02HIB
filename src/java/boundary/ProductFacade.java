@@ -95,13 +95,6 @@ public class ProductFacade extends AbstractFacade<Product> {
         return product;
     }
 
-    public Product addRatingToSeller(Product product) {
-        Person seller = new Person();
-        for (Rating rating : product.getSeller().getRatings()) {
-            
-        }
-        return product;
-    }
 
     public List<Product> getProductsPending() {
         

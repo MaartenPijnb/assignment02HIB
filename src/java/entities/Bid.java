@@ -32,7 +32,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Bid implements Serializable {
-/* Maarten Pijnenborg is ne KODER */
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

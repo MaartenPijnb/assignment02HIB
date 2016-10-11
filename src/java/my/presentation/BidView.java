@@ -51,21 +51,10 @@ public class BidView {
     
 
     private String message;
-//    @ManagedProperty(value = "#{product}")
-//    private ProductView productBean;
-
-    //must povide the setter method
-//    public void setProductBean(ProductView productBean) {
-//        this.productBean = productBean;
-//    }
-
-    /**
-     * Creates a new instance of BidView
-     */
     
     public List<Bid> getSelledBids(){
         //get userID from loggedin user
-        List<Bid> test = bidFacade.getSoldBids();
+        //List<Bid> test = bidFacade.getSoldBids();
         return bidFacade.getSoldBids();
     }
     
