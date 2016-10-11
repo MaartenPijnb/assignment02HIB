@@ -10,6 +10,7 @@ import entities.Person;
 import entities.Product;
 import entities.Rating;
 import entities.Status;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -109,7 +110,8 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public List<Product> getProductsApproved() {
-        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
+        Date c = new Date();
+        List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").setParameter("currentDate", this).getResultList();
         return results;
     }
 
