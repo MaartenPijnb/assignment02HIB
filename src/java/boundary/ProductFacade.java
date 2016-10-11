@@ -6,7 +6,9 @@
 package boundary;
 
 import entities.Category;
+import entities.Person;
 import entities.Product;
+import entities.Rating;
 import entities.Status;
 import java.util.List;
 import javax.ejb.EJB;
@@ -40,7 +42,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public void setCurrentProduct(Product currentProduct) {
-        currentProduct= addCurrentHighestBid(currentProduct);
+        currentProduct = addCurrentHighestBid(currentProduct);
         this.currentProduct = currentProduct;
     }
 
@@ -79,26 +81,29 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public Product addCurrentHighestBid(Product product) {
-      
-            //check if product already has a bid
-            if (!product.getBids().isEmpty()) {
 
-                Object currentHighest = this.getEntityManager().createNamedQuery("Bid.findHighestCurrentBid").setParameter("productID", product.getId()).getSingleResult();
-                product.setCurrentHighestBid((double) currentHighest);
-            } else {
-                product.setCurrentHighestBid(product.getStartPrice());
-            }
+        //check if product already has a bid
+        if (!product.getBids().isEmpty()) {
 
-            
-        
+            Object currentHighest = this.getEntityManager().createNamedQuery("Bid.findHighestCurrentBid").setParameter("productID", product.getId()).getSingleResult();
+            product.setCurrentHighestBid((double) currentHighest);
+        } else {
+            product.setCurrentHighestBid(product.getStartPrice());
+        }
+
         return product;
     }
 
-    public Product addRatingToSeller(Product product){
-        Product p1 = new Product();
-        return p1;
+    public Product addRatingToSeller(Product product) {
+        Person seller = new Person();
+        for (Rating rating : product.getSeller().getRatings()) {
+            
+        }
+        return product;
     }
+
     public List<Product> getProductsPending() {
+        
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
         return results;
     }
@@ -107,6 +112,5 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
         return results;
     }
-    
-    
+
 }

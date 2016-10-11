@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      >
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="content">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Account level</th>
+                        <th>Action</th>
+                    </tr>
+                    <c:forEach var="item" items="#{PersonView.allPersons}">
+                        <tr>
+                            <td>#{item.firstname} #{item.lastname}</td>
+                            <td>#{item.email}</td>
+                            <td>#{item.phone}</td>
+                            <td>#{item.accountLevel}</td>
+                            <td>
+                                <h:form>
+                                    <h:commandLink value="Edit profile" action="#{PersonView.toAdminDetail(item.id)}" />
+                                </h:form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </ui:define>
+
+            <ui:define name="bottom">
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

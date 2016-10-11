@@ -34,6 +34,11 @@ public class PersonFacade extends AbstractFacade<Person> {
         return em;
     }
     private Person currentUser;
+    private Person currentPerson;
+
+    public void setCurrentPerson(Person currentPerson) {
+        this.currentPerson = currentPerson;
+    }
 
     public Person getCurrentUser() {
         return currentUser;
@@ -42,9 +47,7 @@ public class PersonFacade extends AbstractFacade<Person> {
     public void setCurrentUser(Person currentUser) {
         this.currentUser = currentUser;
     }
-    
-    
-    
+
     public PersonFacade() {
         super(Person.class);
     }
@@ -75,7 +78,5 @@ public class PersonFacade extends AbstractFacade<Person> {
         }
 
     }
-
-   
-
+    
 }

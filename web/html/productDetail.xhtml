@@ -100,6 +100,33 @@
 
 
                 </table>    
+                
+                <h2>Ratings of #{product.currentProduct.seller.fullname}</h2>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                         <th>Feedback</th>
+                    </tr>
+
+                    <c:forEach var="item" items="#{product.currentProduct.seller.ratings}">
+                        <tr>
+                            <td><h:outputText value="#{item.moment}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                </h:outputText></td>
+                            <td>#{item.giver.fullname}</td>
+                            <td> <h:outputText value="${item.rating}" >
+                                          
+                                                    </h:outputText></td>
+                            
+                            <td>#{item.feedback}</td>
+                        </tr>
+                    </c:forEach>
+
+
+
+                </table>    
 
             </ui:define>
 
