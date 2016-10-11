@@ -86,13 +86,11 @@ public class BidView {
         bid.setMoment(date);
         bid.setProduct(productFacade.getCurrentProduct());
         bid.setIsAccepted(Boolean.FALSE);
-
         //get current product
         this.bidFacade.create(bid);
         //productBean.toDetail(productFacade.getCurrentProduct().getId().toString());
         message= "Your bidding is registered.";
         //productBean.setProductsApproved(productFacade.getProductsApproved());
-       
         return "/index";
     }
     
