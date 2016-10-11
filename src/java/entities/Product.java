@@ -53,7 +53,7 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date moment, startDate, deadline;
 
-    private Double minimumPriceToSell, startPrice, sellPrice, intervalPrice;
+    private Double minimumPriceToSell, startPrice, sellPrice;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -149,13 +149,7 @@ public class Product implements Serializable {
         this.sellPrice = sellPrice;
     }
 
-    public Double getIntervalPrice() {
-        return intervalPrice;
-    }
 
-    public void setIntervalPrice(Double intervalPrice) {
-        this.intervalPrice = intervalPrice;
-    }
 
     public Status getStatus() {
         return status;

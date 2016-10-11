@@ -70,11 +70,9 @@
                                                          <f:convertNumber currencyCode="EUR" type="currency" />
                                                     </h:outputText>
                               <br></br>
-                                <strong> Interval price:</strong> 
-                                <h:outputText value="${product.currentProduct.intervalPrice}" >
-                                                         <f:convertNumber currencyCode="EUR" type="currency" />
-                                                    </h:outputText>
-                                €<br></br>
+                               
+                              <strong>Seller score</strong>
+                              #{product.currentProduct.seller.ratings.}
                             </p>
                         </td>
                     </tr>

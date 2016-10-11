@@ -55,7 +55,7 @@
                                             #{item.description}
                                             <br>
                                                 Instant buy price: <h:outputText value="#{item.sellPrice}" >
-                                                         <f:convertNumber currencyCode="NOK" type="currency" />
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
                                                     </h:outputText>
                                                 <br>
                                                     Bid expires at #{item.deadline}
@@ -68,7 +68,7 @@
                                             <div class="col-xs-12 col-md-6">
                                                 <p class="lead">
                                                     <h:outputText value="#{item.startPrice}" >
-                                                         <f:convertNumber currencyCode="NOK" type="currency" />
+                                                         <f:convertNumber currencyCode="EUR" type="currency" />
                                                     </h:outputText>
                                               
                                                 </p>

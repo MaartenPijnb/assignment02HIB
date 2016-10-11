@@ -94,6 +94,10 @@ public class ProductFacade extends AbstractFacade<Product> {
         return product;
     }
 
+    public Product addRatingToSeller(Product product){
+        Product p1 = new Product();
+        return p1;
+    }
     public List<Product> getProductsPending() {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
         return results;

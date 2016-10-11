@@ -48,6 +48,8 @@ public class BidView {
     private Bid bid;
   
 
+    
+
     private String message;
 //    @ManagedProperty(value = "#{product}")
 //    private ProductView productBean;
@@ -89,9 +91,12 @@ public class BidView {
         this.bidFacade.create(bid);
         //productBean.toDetail(productFacade.getCurrentProduct().getId().toString());
         message= "Your bidding is registered.";
-        return "/html/productDetail";
+        //productBean.setProductsApproved(productFacade.getProductsApproved());
+       
+        return "/index";
     }
     
+
     public String postInstantBuy(){
         Product currentProduct= productFacade.getCurrentProduct();
         

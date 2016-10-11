@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
@@ -54,11 +55,22 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "bidder")
     private ArrayList<Bid> bids;
 
+    @Transient
+    private double score;
+    
     public Person() {
     }
 
     public Integer getAccountLevel() {
         return accountLevel;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public void setAccountLevel(Integer accountLevel) {

@@ -9,6 +9,7 @@ import boundary.PersonFacade;
 import boundary.ProductFacade;
 import entities.Category;
 import entities.Product;
+import entities.Rating;
 
 import entities.Status;
 import java.io.File;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -39,8 +41,6 @@ public class ProductView {
 
     @EJB
     private ProductFacade productFacade;
-    
-    
 
     /**
      * Creates a new instance of ProductView
@@ -54,13 +54,13 @@ public class ProductView {
     private List<Product> productsPending;
     private List<Product> productsApproved;
     private FilterProduct filterProduct;
-    
+
     // For filtering
     private boolean isFilter = false;
 
     public ProductView() {
         this.product = new Product();
-        this.filterProduct = new  FilterProduct();
+        this.filterProduct = new FilterProduct();
     }
 
     @PostConstruct
@@ -84,16 +84,17 @@ public class ProductView {
         productsPending = productFacade.getProductsPending();
         return productsPending;
     }
+  
 
     public List<Product> getProductsApproved() {
+
         if (!isFilter) {
             productsApproved = productFacade.getProductsApproved();
-        }
-        else {
+        } else {
             productsApproved = productFacade.filter(this.filterProduct);
         }
-        
-       // productsApproved = productFacade.addCurrentHighestBid(productsApproved);
+      
+        // productsApproved = productFacade.addCurrentHighestBid(productsApproved);
         return productsApproved;
     }
 
@@ -128,8 +129,6 @@ public class ProductView {
     public void setFilterProduct(FilterProduct filterProduct) {
         this.filterProduct = filterProduct;
     }
-    
-    
 
     public String toDetail(String id) {
         Product tempProduct = new Product();
@@ -171,11 +170,9 @@ public class ProductView {
     public void setProductsApproved(List<Product> productsApproved) {
         this.productsApproved = productsApproved;
     }
-    
+
     public void filter() {
-        isFilter = true; 
+        isFilter = true;
     }
-    
-    
 
 }
