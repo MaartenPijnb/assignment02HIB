@@ -37,19 +37,19 @@
                                                 ${item.category}<br></br>
                                                 #{item.description}
                                                 <br>
-                                                    Instant buy price: €#{item.sellPrice}
+                                                    Instant buy price: #{item.sellPrice}
                                                 </br>
 
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-6">
                                                     <p class="lead">
-                                                        €#{item.startPrice}</p>
+                                                        #{item.startPrice}</p>
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <h:form>
                                                         <h:commandButton value="Approve" class="btn btn-success" action="#{product.approveProduct(item.id)}" /> 
-                                                        <h:commandButton value="Dissaprove" class="btn btn-danger" action="#{product.deleteProduct(item.id)}" />
+                                                        <h:commandButton value="Disapprove" class="btn btn-danger" action="#{product.deleteProduct(item.id)}" />
                                                     </h:form>
 
 
