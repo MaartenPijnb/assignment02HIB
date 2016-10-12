@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import entities.Bid;
 import entities.Category;
 import entities.Person;
 import entities.Product;
@@ -107,5 +108,8 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
         return results;
     }
-
+    
+    public List<Bid> getBids(Product product){
+        return product.getBids();
+    }
 }

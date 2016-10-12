@@ -5,8 +5,10 @@
  */
 package my.presentation;
 
+import boundary.BidFacade;
 import boundary.PersonFacade;
 import boundary.ProductFacade;
+import entities.Bid;
 import entities.Category;
 import entities.Person;
 import entities.Product;
@@ -37,6 +39,9 @@ import other.FilterProduct;
 @Named(value = "product")
 @RequestScoped
 public class ProductView {
+
+    @EJB
+    private BidFacade bidFacade;
 
     @EJB
     private PersonFacade personFacade;
@@ -132,7 +137,7 @@ public class ProductView {
     }
 
     public String toDetail(String id) {
-        
+
         // Check if user is logged in, if the user session exists redirect to detail page. If not redirect to index.
         FacesContext context = FacesContext.getCurrentInstance();
         Person user = (Person) context.getExternalContext().getSessionMap().get("user");
@@ -154,6 +159,11 @@ public class ProductView {
     public String deleteProduct(String id) {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
+        List<Bid> bids = productFacade.getBids(tempProduct);
+        for (Bid bid : bids)
+        {
+            bidFacade.remove(bid);
+        }
         currentProduct = productFacade.find(tempProduct.getId());
         productFacade.remove(currentProduct);
         return "/index";
