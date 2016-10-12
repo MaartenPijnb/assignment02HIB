@@ -138,7 +138,7 @@ public class ProductView {
         Person user = (Person) context.getExternalContext().getSessionMap().get("user");
 
         if (user == null) {
-            return "/index";
+            return "/html/login";
         } else {
             Product tempProduct = new Product();
             tempProduct.setId(Long.parseLong(id));
