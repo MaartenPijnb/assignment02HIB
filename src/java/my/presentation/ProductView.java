@@ -60,6 +60,7 @@ public class ProductView {
     private Product product;
     private List<Product> productsPending;
     private List<Product> productsApproved;
+    private List<Product> productsApprovedWithoutDate;
     private FilterProduct filterProduct;
 
     // For filtering
@@ -92,6 +93,11 @@ public class ProductView {
         return productsPending;
     }
 
+    public List<Product> getProductsApprovedWithoutDate(){
+        productsApprovedWithoutDate = productFacade.getProductsApprovedWithoutDate();
+        return productsApprovedWithoutDate;
+    }
+    
     public List<Product> getProductsApproved() {
 
         if (!isFilter) {

@@ -29,7 +29,7 @@
       
                 
                 <h:form class="form-horizontal">
-
+                    <h:messages style="margin:8px;font-size:15px;"/>
                     <div class="form-group">
                         <div class="col-md-1">
                             <h:outputLabel value="Bid price:"/>
@@ -40,8 +40,8 @@
 
                         </div>
                         <div class="col-md-2">
-                            <h:commandButton value="Start bidding" class="btn btn-success" action="#{bid.postBid()}" />
-
+                            <h:commandButton id="postBid" value="Start bidding" class="btn btn-success" action="#{bid.postBid()}" />
+                            
                         </div>
                         <div class="col-md-2">
                             Buy instantly for 
