@@ -3,6 +3,7 @@
   <persistence-unit name="Assignment2_GoedPU" transaction-type="JTA">
     <jta-data-source>java:app/ProjectConnection</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>

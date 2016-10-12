@@ -6,15 +6,15 @@
 package boundary;
 
 import entities.Category;
-import entities.Person;
 import entities.Product;
-import entities.Rating;
 import entities.Status;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import other.FilterProduct;
 
@@ -95,16 +95,18 @@ public class ProductFacade extends AbstractFacade<Product> {
         return product;
     }
 
-
     public List<Product> getProductsPending() {
-        
+
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
         return results;
     }
 
     public List<Product> getProductsApproved() {
-        Date c = new Date();
+ 
+   
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
+  
+        
         return results;
     }
 
