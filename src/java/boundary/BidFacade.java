@@ -17,6 +17,15 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.jms.DeliveryMode;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.jms.TopicConnection;
+import javax.jms.TopicConnectionFactory;
+import javax.jms.TopicPublisher;
+import javax.jms.TopicSession;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -56,7 +65,7 @@ public class BidFacade extends AbstractFacade<Bid> {
         return soldBids;
     }
 
-    public void postBid(Product product, Bid bid, Person user) {
+    public boolean postBid(Product product, Bid bid, Person user) {
         Double bidPrice = bid.getPrice();
         if (bidPrice > product.getStartPrice() && bidPrice < product.getSellPrice() && bidPrice > product.getCurrentHighestBid()) {
             bid.setBidder(user);
@@ -74,6 +83,7 @@ public class BidFacade extends AbstractFacade<Bid> {
                                     FacesMessage.SEVERITY_ERROR,
                                     "Bid was placed!",
                                     "Bid was placed!"));
+            return true;
         }
         else {
             FacesContext
@@ -84,6 +94,43 @@ public class BidFacade extends AbstractFacade<Bid> {
                                     FacesMessage.SEVERITY_ERROR,
                                     "Your bid is not accepted! Your bid has to be higher than the minimumprice and the current highest bid or lower than the instant buy price.",
                                     "Your bid is not accepted! Your bid has to be higher than the minimumprice and the current highest bid or lower than the instant buy price."));
+            return false;
         }
+    }
+    
+    public void sentMessage() throws Exception{
+        // get the initial context
+       InitialContext ctx = new InitialContext();
+                                                                           
+       // lookup the topic object
+       Topic topic = (Topic) ctx.lookup("topic/topic0");
+                                                                           
+       // lookup the topic connection factory
+       TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx.
+           lookup("topic/connectionFactory");
+                                                                           
+       // create a topic connection
+       TopicConnection topicConn = connFactory.createTopicConnection();
+                                                                           
+       // create a topic session
+       TopicSession topicSession = topicConn.createTopicSession(false, 
+           Session.AUTO_ACKNOWLEDGE);
+                                                                           
+       // create a topic publisher
+       TopicPublisher topicPublisher = topicSession.createPublisher(topic);
+       topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+                                                                           
+       // create the "Hello World" message
+       TextMessage message = topicSession.createTextMessage();
+       message.setText("Hello World");
+                                                                           
+       // publish the messages
+       topicPublisher.publish(message);
+                                                                           
+       // print what we did
+       System.out.println("Message published: " + message.getText());
+                                                                           
+       // close the topic connection
+       topicConn.close();
     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -94,6 +95,7 @@ public class Bid implements Serializable {
         this.moment = moment;
     }
 
+    @XmlTransient
     public Person getBidder() {
         return bidder;
     }
