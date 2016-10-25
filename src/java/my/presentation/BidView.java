@@ -109,6 +109,10 @@ public class BidView {
         currentProduct.setStatus(Status.SOLD);
         productFacade.edit(currentProduct);
         message = "You succesfully bought the product.";
+        try {
+        this.bidFacade.sentMessage();}
+        catch(Exception e) {}
+        
         return "/index";
     }
 
