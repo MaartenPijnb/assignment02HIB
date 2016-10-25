@@ -17,12 +17,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import other.FilterProduct;
 
 /**
  *
  * @author maart
  */
+@ServletSecurity(
+    @HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL))
+
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
 
