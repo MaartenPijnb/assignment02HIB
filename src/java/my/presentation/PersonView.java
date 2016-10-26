@@ -8,11 +8,23 @@ package my.presentation;
 import boundary.PersonFacade;
 import entities.Person;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.jms.JMSContext;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueReceiver;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.InitialContext;
 
 /**
  *
@@ -116,4 +128,43 @@ public class PersonView {
         return "/index";
     }
 
+//    //send winning mails
+//    static final Logger logger = Logger.getLogger("ReceiverBean");
+//    @Inject
+//    private JMSContext context;
+//    @Resource(lookup = "java:comp/jms/webappQueue")
+//    private Queue queue;
+//
+//    public void sendMails() throws Exception{
+//        // get the initial context
+//       InitialContext context = new InitialContext();
+//                                                                           
+//      // lookup the queue object
+//       Queue queue = (Queue) context.lookup("queue/queue0");
+//                                                                           
+//       // lookup the queue connection factory
+//       QueueConnectionFactory conFactory = (QueueConnectionFactory) context.lookup ("queue/connectionFactory");
+//                                                                           
+//       // create a queue connection
+//       QueueConnection queConn = conFactory.createQueueConnection();
+//                                                                           
+//       // create a queue session
+//       QueueSession queSession = queConn.createQueueSession(false,   
+//       Session.AUTO_ACKNOWLEDGE);
+// 
+//       // create a queue receiver
+//       QueueReceiver queReceiver = queSession.createReceiver(queue);
+//                                                                           
+//       // start the connection
+//       queConn.start();
+//                                                                           
+//       // receive a message
+//       TextMessage message = (TextMessage) queReceiver.receive();
+//                                                                           
+//       // print the message
+//       System.out.println("Message Received: " + message.getText());
+//                                                                           
+//       // close the queue connection
+//       queConn.close();
+//    }
 }

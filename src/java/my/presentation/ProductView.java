@@ -12,23 +12,29 @@ import entities.Bid;
 import entities.Category;
 import entities.Person;
 import entities.Product;
-import entities.Rating;
-
+import javax.naming.InitialContext;
 import entities.Status;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.jms.DeliveryMode;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.InitialContext;
 import javax.servlet.http.Part;
 import other.FilterProduct;
 
@@ -74,8 +80,13 @@ public class ProductView {
     @PostConstruct
     public void init() {
         allCategories = Category.values();
-//        allProducts = productFacade.findAll();
-//        allProducts = productFacade.addCurrentHighestBid(allProducts);
+//        try {
+//           // notifyButyer();
+////        allProducts = productFacade.findAll();
+////        allProducts = productFacade.addCurrentHighestBid(allProducts);
+//        } catch (Exception ex) {
+//            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     private Part file; // +getter+setter
@@ -93,11 +104,11 @@ public class ProductView {
         return productsPending;
     }
 
-    public List<Product> getProductsApprovedWithoutDate(){
+    public List<Product> getProductsApprovedWithoutDate() {
         productsApprovedWithoutDate = productFacade.getProductsApprovedWithoutDate();
         return productsApprovedWithoutDate;
     }
-    
+
     public List<Product> getProductsApproved() {
 
         if (!isFilter) {
@@ -166,8 +177,7 @@ public class ProductView {
         Product tempProduct = new Product();
         tempProduct.setId(Long.parseLong(id));
         List<Bid> bids = productFacade.getBids(tempProduct);
-        for (Bid bid : bids)
-        {
+        for (Bid bid : bids) {
             bidFacade.remove(bid);
         }
         currentProduct = productFacade.find(tempProduct.getId());
@@ -202,5 +212,40 @@ public class ProductView {
     public void filter() {
         isFilter = true;
     }
+
+    //notifybuyer
+
+//    public void notifyButyer() throws Exception {
+//      // get the initial context
+//       InitialContext context = new InitialContext();
+//                                                               
+//       // lookup the queue object
+//       Queue queue = (Queue) context.lookup("queue/queue0");
+//                                                                           
+//       // lookup the queue connection factory
+//       QueueConnectionFactory conFactory = (QueueConnectionFactory) context.lookup ("queue/connectionFactory");
+//                                                                           
+//       // create a queue connection
+//       QueueConnection queConn = conFactory.createQueueConnection();
+//                                                                           
+//       // create a queue session
+//       QueueSession queSession = queConn.createQueueSession(false, Session.DUPS_OK_ACKNOWLEDGE);
+//                                                                           
+//       // create a queue sender
+//       QueueSender queSender = queSession.createSender(queue);
+//       queSender.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+//                                                                           
+//       // create a simple message to say "Hello World"
+//       TextMessage message = queSession.createTextMessage("Hello World");
+//                                                     
+//       // send the message
+//       queSender.send(message);
+//                                                                          
+//       // print what we did
+//       System.out.println("Message Sent: " + message.getText());
+//                                                                           
+//       // close the queue connection
+//       queConn.close();
+//    }
 
 }

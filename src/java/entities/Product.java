@@ -27,6 +27,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -45,6 +47,7 @@ import javax.persistence.Transient;
 })
 
 @Entity
+@XmlRootElement
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -178,6 +181,7 @@ public class Product implements Serializable {
         this.seller = seller;
     }
 
+    @XmlTransient
     public ArrayList<Bid> getBids() {
         return bids;
     }

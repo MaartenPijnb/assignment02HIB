@@ -17,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +35,7 @@ import javax.persistence.Transient;
 })
 
 @Entity
+@XmlRootElement
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +80,7 @@ public class Person implements Serializable {
         this.accountLevel = accountLevel;
     }
 
+    @XmlTransient
     public ArrayList<Rating> getRatings() {
         return ratings;
     }
@@ -87,6 +91,7 @@ public class Person implements Serializable {
 
 
 
+    @XmlTransient
     public ArrayList<Product> getProducts() {
         return products;
     }
@@ -95,6 +100,7 @@ public class Person implements Serializable {
         this.products = products;
     }
 
+    @XmlTransient
     public ArrayList<Bid> getBids() {
         return bids;
     }

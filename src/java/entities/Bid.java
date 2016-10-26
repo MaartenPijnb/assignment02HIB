@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -31,6 +32,7 @@ import javax.persistence.TemporalType;
 })
 
 @Entity
+@XmlRootElement
 public class Bid implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

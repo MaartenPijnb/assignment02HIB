@@ -11,8 +11,17 @@ import entities.Product;
 import entities.Status;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.jms.JMSContext;
+import javax.jms.JMSRuntimeException;
+import javax.jms.Queue;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -101,23 +110,23 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusPending").getResultList();
         return results;
     }
-    
-     public List<Product> getProductsApprovedWithoutDate() {
+
+    public List<Product> getProductsApprovedWithoutDate() {
 
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApprovedWithoutDate").getResultList();
         return results;
     }
 
     public List<Product> getProductsApproved() {
- 
-   
+
         List<Product> results = this.getEntityManager().createNamedQuery("Product.findByStatusApproved").getResultList();
-  
-        
+
         return results;
     }
-    
-    public List<Bid> getBids(Product product){
+
+    public List<Bid> getBids(Product product) {
         return product.getBids();
     }
+
+
 }
