@@ -9,11 +9,17 @@ import entities.Rating;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 
 /**
  *
  * @author maart
  */
+
+@ServletSecurity(
+    @HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL))
+
 @Stateless
 public class RatingFacade extends AbstractFacade<Rating> {
 

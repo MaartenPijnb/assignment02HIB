@@ -7,11 +7,16 @@ package boundary;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 
 /**
  *
  * @author Maarten
  */
+@ServletSecurity(
+    @HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL))
+
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;

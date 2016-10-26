@@ -11,11 +11,18 @@ import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
 /**
  *
  * @author Maarten
  */
+
+@ServletSecurity(
+    @HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL))
+
 @Stateless
 public class PersonFacade extends AbstractFacade<Person> {
 

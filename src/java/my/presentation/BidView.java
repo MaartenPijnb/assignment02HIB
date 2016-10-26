@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.el.ELContext;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -47,65 +48,71 @@ public class BidView {
     private BidFacade bidFacade;
 
     private Bid bid;
-  
 
-    
+    @ManagedProperty(value = "#{product}")
+    private ProductView productView;
+
+    public ProductView getProductView() {
+        return productView;
+    }
+
+    public void setProductView(ProductView productView) {
+        this.productView = productView;
+    }
 
     private String message;
-    
-    public List<Bid> getSelledBids(){
+
+    public List<Bid> getSelledBids() {
         //get userID from loggedin user
         //List<Bid> test = bidFacade.getSoldBids();
         return bidFacade.getSoldBids();
     }
-    
+
     public BidView() {
         this.bid = new Bid();
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return message;
     }
+
     public Bid getBid() {
         return bid;
     }
 
-    public String postBid() throws IOException {
-        bid.setBidder(personFacade.getCurrentUser());
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        Date date = new Date();
-        bid.setMoment(date);
-        bid.setProduct(productFacade.getCurrentProduct());
-        bid.setIsAccepted(Boolean.FALSE);
-        //get current product
-        this.bidFacade.create(bid);
-        //productBean.toDetail(productFacade.getCurrentProduct().getId().toString());
-        message= "Your bidding is registered.";
-        //productBean.setProductsApproved(productFacade.getProductsApproved());
-        return "/index";
-    }
-    
+    public void postBid() throws IOException {
+        Product currentProduct = productFacade.getCurrentProduct();
+        Person currentUser = personFacade.getCurrentUser();
+        bidFacade.postBid(currentProduct, bid, currentUser);
 
-    public String postInstantBuy(){
-        Product currentProduct= productFacade.getCurrentProduct();
-        
+        // redirect to detail page
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        setProductView((ProductView) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "product"));
+        productView.toDetail(currentProduct.getId().toString());
+    }
+
+    public String postInstantBuy() {
+        Product currentProduct = productFacade.getCurrentProduct();
+
         //make the bid
-         bid.setBidder(personFacade.getCurrentUser());
+        bid.setBidder(personFacade.getCurrentUser());
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Date date = new Date();
         bid.setMoment(date);
         bid.setProduct(productFacade.getCurrentProduct());
         bid.setIsAccepted(Boolean.TRUE);
         bid.setPrice(currentProduct.getSellPrice());
-      
-    
+
         this.bidFacade.create(bid);
-        
-        
+
         //change the product status
-        
         currentProduct.setStatus(Status.SOLD);
         productFacade.edit(currentProduct);
-        message="You succesfully bought the product.";
+        message = "You succesfully bought the product.";
+        try {
+        this.bidFacade.sentMessage();}
+        catch(Exception e) {}
+        
         return "/index";
     }
 

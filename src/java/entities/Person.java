@@ -52,6 +52,7 @@ public class Person implements Serializable {
     @OneToMany(mappedBy="receiver")
     private ArrayList<Rating> ratings;
     
+    @XmlTransient
     @OneToMany(mappedBy = "seller")
     private ArrayList<Product> products;
     
@@ -189,7 +190,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.User[ id=" + id + " ]";
+        return "entities.Person[ id=" + id + " ]";
     }
     
 }
